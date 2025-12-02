@@ -6,16 +6,10 @@ public class App {
     public static void main (String[] args) {
         Validator v = new Validator();
         StringSchema schema = v.string();
-        schema.required();
-        schema.contains("wghfd");
+        //schema.required();
         System.out.println(
-                schema.isValid("what does the fox say") // true
+                schema.isValid(null) // true
         );
-        var schema1 = v.string();
-        System.out.println(
-                schema1.minLength(10).isValid("Hexlet")
-        );
-
     }
 
 }
