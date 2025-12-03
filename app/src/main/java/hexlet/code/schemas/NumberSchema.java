@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public class NumberSchema extends BaseSchema<Integer> {
+public final class NumberSchema extends BaseSchema<Integer> {
     @Override
     public NumberSchema required() {
         super.required();
@@ -11,12 +11,12 @@ public class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema positive() {
         Predicate<Integer> rule = value -> value != null && value > 0;
-        rules.put("positive", rule);
+        super.addRule("positive", rule);
         return this;
     }
-    public NumberSchema range (int min, int max) {
+    public NumberSchema range(int min, int max) {
         Predicate<Integer> rule = value -> value != null && value >= min && value <= max;
-        rules.put("range", rule);
+        super.addRule("range", rule);
         return this;
     }
 }

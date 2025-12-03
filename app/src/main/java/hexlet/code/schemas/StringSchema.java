@@ -2,12 +2,12 @@ package hexlet.code.schemas;
 
 import java.util.function.Predicate;
 
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
 
     @Override
     public StringSchema required() {
         Predicate<String> rule = value -> value != null && !value.isEmpty();
-        rules.put("required", rule);
+        super.addRule("range", rule);
         return this;
     }
     public StringSchema minLength(int length) {
@@ -17,7 +17,7 @@ public class StringSchema extends BaseSchema<String> {
             }
             return value.length() >= length;
         };
-        rules.put("minLength", rule);
+        super.addRule("minLength", rule);
         return this;
     }
     public StringSchema contains(String substring) {
@@ -27,7 +27,7 @@ public class StringSchema extends BaseSchema<String> {
             }
             return value.contains(substring);
         };
-        rules.put("contains", rule);
+        super.addRule("contains", rule);
         return this;
     }
 }
