@@ -12,6 +12,10 @@ import java.util.function.Predicate;
 public class BaseSchema<T> {
     private Map<String, Predicate<T>> rules = new HashMap<>();
 
+    public Map<String, Predicate<T>> getRules() {
+        return rules;
+    }
+
     /**
      * Метод для добавления правила валидации в коллекцию Map.
      * @param key ключ-имя правила
