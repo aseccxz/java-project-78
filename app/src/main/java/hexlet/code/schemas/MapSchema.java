@@ -3,7 +3,7 @@ package hexlet.code.schemas;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class MapSchema extends BaseSchema<Map<?, ?>> {
+public final class MapSchema extends BaseSchema<Map<?, ?>> {
 
     @Override
     public MapSchema required() {
@@ -16,5 +16,16 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
         super.addRule("sizeof", rule);
         return this;
     }
-
+    public <T> MapSchema shape(Map<String, BaseSchema<T>> schemas) {
+        Predicate<Map<?, ?>> rule = value -> {
+            for (var key : value.keySet()) {
+                if (!schemas.get(key).isValid((T) value.get(key))) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        super.addRule("shape", rule);
+        return this;
+    }
 }

@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringSchemaTest {
-
+    private static final int FIVE = 5;
+    private static final int ONE = 1;
+    private static final int ONE_HUNDRED = 100;
     @Test
     public void testRequired() {
         Validator v = new Validator();
@@ -31,14 +33,14 @@ public class StringSchemaTest {
     public void testMinLength() {
         Validator v = new Validator();
         StringSchema schema = v.string();
-        assertTrue(schema.minLength(5).isValid("what does the fox say"));
-        assertFalse(schema.minLength(100).isValid("Hello"));
-        assertFalse(schema.minLength(1).isValid(null));
+        assertTrue(schema.minLength(FIVE).isValid("what does the fox say"));
+        assertFalse(schema.minLength(ONE_HUNDRED).isValid("Hello"));
+        assertFalse(schema.minLength(ONE).isValid(null));
     }
     @Test
     public void testCombined() {
         Validator v = new Validator();
-        StringSchema schema = v.string().required().minLength(5).contains("hex");
+        StringSchema schema = v.string().required().minLength(FIVE).contains("hex");
         assertTrue(schema.isValid("hexagon"));
         assertFalse(schema.isValid("dragon"));
         assertFalse(schema.isValid("hex"));
